@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, Input } from "antd";
 
 const STORE_NAME = "short_urls";
 
@@ -140,19 +140,14 @@ export const App = () => {
   }, []);
 
   return (
-    <div>
-      <TextField
-        label="链接地址"
-        variant="outlined"
-        value={url}
-        onChange={handleUrlChange}
-      />
+    <div style={{ margin: 16 }}>
+      <Input style={{ width: 200 }} value={url} onChange={handleUrlChange} />
       <Button onClick={handleSortURL} disabled={!url}>
         生成短链
       </Button>
       <Button onClick={handleAllShortURLs}>所有的短链</Button>
       <br />
-      {shortUrl && <> 短链 https://yunji2025.com/{shortUrl}</>}
+      {shortUrl && <> 短链 https://luaslz.com/{shortUrl}</>}
       <br />
       短链列表
       <ul>

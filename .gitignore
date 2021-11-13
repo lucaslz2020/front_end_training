@@ -3,3 +3,6 @@ node_modules
 .parcel-cache
 dist
 .pnpm-debug.log
+.DS_Store
+dist-ssr
+*.local
