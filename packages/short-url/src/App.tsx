@@ -1,6 +1,5 @@
-import * as React from "react";
-import { Button, Input } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import { Button, TextField } from "@mui/material";
 
 const STORE_NAME = "short_urls";
 
@@ -20,10 +19,10 @@ export const App = () => {
   const [shortURLs, setShortUrls] = useState<ISortURL[]>();
 
   const getWriteStore = () =>
-    dbRef.current.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME);
+    dbRef.current!.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME);
 
   const getReadStore = () =>
-    dbRef.current.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
+    dbRef.current!.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
 
   const save = (shortURL: ISortURL) =>
     new Promise<number>((resolve, reject) => {
@@ -111,7 +110,7 @@ export const App = () => {
     setShortUrls(results);
   };
 
-  const handleUrlChange = (e) => {
+  const handleUrlChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setUrl(e.target.value);
   };
 
@@ -142,7 +141,12 @@ export const App = () => {
 
   return (
     <div>
-      <Input value={url} onChange={handleUrlChange} />
+      <TextField
+        label="链接地址"
+        variant="outlined"
+        value={url}
+        onChange={handleUrlChange}
+      />
       <Button onClick={handleSortURL} disabled={!url}>
         生成短链
       </Button>
