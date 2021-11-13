@@ -1,0 +1,5 @@
+node_modules
+.idea
+.parcel-cache
+short-url/dist
+.pnpm-debug.log
