@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const STORE_NAME = "short_urls";
 
 interface ISortURL {
+  id?: number;
   url: string;
   urlKey?: string;
 }
