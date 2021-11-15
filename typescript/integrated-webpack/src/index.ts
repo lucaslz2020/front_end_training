@@ -1,3 +1,5 @@
+import * from "./interface";
+
 const anExampleVariable = "Hello World";
 console.log(anExampleVariable);
 
