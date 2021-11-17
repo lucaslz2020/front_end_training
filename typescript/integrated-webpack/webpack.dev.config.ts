@@ -13,7 +13,7 @@ const config: webpack.Configuration = {
     extensions: [".ts", ".tsx", ".js"],
   },
   module: {
-    rules: [{ test: "/.tsx?$/", loader: "ts-loader" }],
+    rules: [{ test: /.tsx?$/, loader: "ts-loader" }],
   },
   devServer: {
     static: path.resolve(__dirname, "public"),

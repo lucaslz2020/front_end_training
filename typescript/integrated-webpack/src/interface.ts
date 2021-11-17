@@ -1,5 +1,5 @@
 interface IUser {
-  readonly recordId: number;
+  recordId: number;
   name: string;
   age?: number;
   [key: string]: any;
@@ -99,7 +99,7 @@ interface StringUsernames {
 const usernames: StringUsernames = ["张三", "李四"];
 
 interface Names {
-  [key: string]: string;
+  [key: string]: any;
   [index: number]: number;
 }
 
