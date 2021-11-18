@@ -55,3 +55,39 @@ namespace A {
   }
   let log2: ILog = log;
 }
+
+namespace B {
+  class Log<T> {
+    // static run(value: T) {}
+    run(value: T) {
+      console.log(value);
+      return value;
+    }
+  }
+
+  const numberLog = new Log<number>();
+  numberLog.run(1);
+
+  let anyLog = new Log();
+  anyLog.run("1");
+  anyLog.run({ test: 1 });
+}
+
+namespace C {
+  interface ILength {
+    length: number;
+  }
+  class Log<T extends ILength> {
+    run(value: T) {
+      console.log(value);
+      return value;
+    }
+  }
+
+  let anyLog = new Log();
+  anyLog.run({ test: 1 });
+
+  anyLog.run("1");
+  anyLog.run({ length: 1 });
+  anyLog.run(["1", "2"]);
+}
