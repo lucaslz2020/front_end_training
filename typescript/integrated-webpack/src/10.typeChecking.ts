@@ -1,3 +1,4 @@
+// 自动推断
 {
   let a = "1";
   let b = [];
@@ -14,32 +15,36 @@
   window.onkeydown = (event) => {};
 }
 
+// 类型兼容性
 interface IFoo {
   bar: number;
 }
 
 let foo = {} as IFoo;
-let foo1: IFoo = {};
+// let foo1: IFoo = {};
 
-let s: string = "a";
-s = null;
+// let s: string = "a";
+// s = null;
 
-interface X {
-  a: any;
-  b: any;
+// 接口兼容性
+{
+    interface X {
+        a: any;
+        b: any;
+    }
+
+    interface Y {
+        a: any;
+        b: any;
+        c: any;
+    }
+
+    let x: X = {a: 1, b: 2};
+    let y: Y = {a: 1, b: 2, c: 3};
+
+    x = y;
+    // y = x;
 }
-
-interface Y {
-  a: any;
-  b: any;
-  c: any;
-}
-
-let x: X = { a: 1, b: 2 };
-let y: Y = { a: 1, b: 2, c: 3 };
-
-x = y;
-y = x;
 
 /*
  * X（目标类型） = Y（源类型），X 兼容 Y

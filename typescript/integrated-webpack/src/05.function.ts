@@ -1,18 +1,28 @@
-// let add: (lhs: number, rhs: number) => number;
-
-function add(lhs: number, rhs: number) {
-  return lhs + rhs;
+{
+    let add: (lhs: number, rhs: number) => number;
 }
 
-const add1 = (lhs: number, rhs: number) => lhs + rhs;
-
-interface IAdd {
-  (lhs: number, rhs: number): number;
+{
+    function add(lhs: number, rhs: number) {
+        return lhs + rhs;
+    }
 }
 
-type Add = (lhs: number, rhs: number) => number;
+{
+    const add = (lhs: number, rhs: number) => lhs + rhs;
+}
 
-let add2: Add = (lhs, rhs) => lhs + rhs;
+{
+    interface IAdd {
+        (lhs: number, rhs: number): number;
+    }
+}
+
+{
+    type Add = (lhs: number, rhs: number) => number;
+    let add: Add = (lhs, rhs) => lhs + rhs;
+    // add(1, 2, 3);
+}
 
 interface IComponent {
   (): void;
@@ -37,7 +47,7 @@ component1.render();
 const component2 = getComponent();
 component2.render();
 
-add(1, 2, 3);
+
 
 const add3 = (lhs: number, rhs?: number) => {
   return lhs + (rhs ?? 0);
@@ -65,3 +75,19 @@ function add7(...rest: any[]): any {
     );
   }
 }
+
+// this.
+window.onkeydown = (event) => {
+}
+
+function say(this: Window, name: string) {
+    console.log(this, name);
+}
+window.say = say;
+window.say("hi");
+
+const obj = {
+    say,
+}
+// 指向的不是window，因此报错
+// obj.say("Hi")

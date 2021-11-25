@@ -36,10 +36,10 @@ class Auto {
 
 interface IAuto extends Auto {}
 
-class C implements IAuto {
-  state = 2;
-  private state2 = 1;
-}
+// class C implements IAuto {
+//   state = 2;
+//   private state2 = 1;
+// }
 
 // 必须实现state熟悉，因为它是Auto子类。
 class Bus extends Auto implements IAuto {}

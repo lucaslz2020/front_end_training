@@ -33,7 +33,7 @@ namespace T {
 type Log = <T>(value: T) => T;
 const myLog: Log = log;
 
-namespace A {
+namespace AC {
   function log<T>(value: T): T {
     console.log(value);
     return value;
@@ -56,7 +56,7 @@ namespace A {
   let log2: ILog = log;
 }
 
-namespace B {
+namespace BC {
   class Log<T> {
     // static run(value: T) {}
     run(value: T) {
@@ -73,7 +73,7 @@ namespace B {
   anyLog.run({ test: 1 });
 }
 
-namespace C {
+namespace CC {
   interface ILength {
     length: number;
   }
@@ -85,7 +85,7 @@ namespace C {
   }
 
   let anyLog = new Log();
-  anyLog.run({ test: 1 });
+  // anyLog.run({ test: 1 });
 
   anyLog.run("1");
   anyLog.run({ length: 1 });
