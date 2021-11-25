@@ -88,6 +88,36 @@ namespace UnionTypes {
   console.log("1", getArea({ kind: "circle", radius: 1 }));
 }
 
+namespace IndexType {
+  const user: IUser = {
+    name: "lucas",
+    age: 20,
+  };
+  const getUserValues = (user: any, keys: string[]) => {
+    return keys.map((key) => user[key]);
+  };
+
+  console.log("user", getValues(user, ["name", "age"]));
+  // console.log("user", getValues(user, ["weight", "height"]));
+
+  interface IUser {
+    name: string;
+    age: number;
+  }
+  // keyof
+  let key: keyof IUser;
+  // T[K]
+  let value: IUser["name"];
+
+  // T extends U
+  const getUserValues1 = <T, K extends keyof T>(user: T, keys: K[]): T[K][] => {
+    return keys.map((key) => user[key]);
+  };
+
+  console.log("user", getUserValues1(user, ["name", "age"]));
+  // console.log("user", getUserValues1(user, ["weight", "height"]));
+}
+
 let obj111 = {
   // a: 1,
   // b: 2,
