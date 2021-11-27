@@ -118,32 +118,25 @@ namespace IndexType {
   // console.log("user", getUserValues1(user, ["weight", "height"]));
 }
 
-let obj111 = {
-  // a: 1,
-  // b: 2,
-  // c: 3,
-};
+namespace MappedTypes {
+  interface IUser {
+    name: string;
+    age: number;
+  }
 
-// function getValues(obj: any, keys: string[]) {
-//     return keys.map(key => obj[key])
-// }
-function getValues<T, K extends keyof T>(obj: T, keys: K[]): T[K][] {
-  return keys.map((key) => obj[key]);
+  // 只读
+  type ReadonlyUser = Readonly<IUser>;
+
+  // 如何实现？
+
+  // optional
+  type PartialUser = Partial<IUser>;
+
+  type PickUser = Pick<IUser, "age">;
+  type AllUser = Pick<IUser, "age" | "name">;
+
+  type RecordUser = Record<"lucas" | "john", IUser>;
 }
-// console.log(getValues(obj, ["a", "b"]));
-// console.log(getValues(obj, ['d', 'e']))
-
-// keyof T
-interface Obj {
-  a: number;
-  b: string;
-}
-let key: keyof Obj;
-
-// T[K]
-let value: Obj["a"];
-
-// T extends U
 
 // 类型映射
 interface Obj {
