@@ -97,7 +97,7 @@ namespace IndexType {
     return keys.map((key) => user[key]);
   };
 
-  console.log("user", getValues(user, ["name", "age"]));
+  console.log("user", getUserValues(user, ["name", "age"]));
   // console.log("user", getValues(user, ["weight", "height"]));
 
   interface IUser {
@@ -138,54 +138,47 @@ namespace MappedTypes {
   type RecordUser = Record<"lucas" | "john", IUser>;
 }
 
-// 类型映射
-interface Obj {
-  // a: string;
-  // b: number;
+// 条件类型  T extends U ? X : Y
+namespace ConditionalTypes {
+  type TypeName<T> = T extends string
+    ? "string"
+    : T extends number
+    ? "number"
+    : T extends boolean
+    ? "boolean"
+    : T extends undefined
+    ? "undefined"
+    : T extends Function
+    ? "function"
+    : "object";
+
+  type T1 = TypeName<string>;
+  //  T1 是什么类型？
+
+  // T2 是什么类型?
+  type T2 = TypeName<string[]>;
+
+  // 分布式条件类型 (A | B) extends U ? X : Y
+  // 拆解：A extends U ? X : Y | B extends U ? X : Y
+  type T3 = TypeName<string | string[]>;
+
+  // 实现类型的过滤。
+  // Exclude<T, U>
+  type Diff<T, U> = T extends U ? never : T;
+  type T4 = Diff<"a" | "b" | "c", "a" | "e">;
+  // Diff<"a", "a" | "e"> | Diff<"b", "a" | "e"> | Diff<"c", "a" | "e">
+  // never | "b" | "c"
+  // "b" | "c"
+  // 可以从类型T中过滤掉可以赋值给类型U的类型
+
+  // NonNullable<T>
+  type NotNull<T> = Diff<T, null | undefined>;
+  type T5 = NotNull<string | number | undefined | null>;
+
+  // Extract<T, U> 可以从类型U中抽取出可以赋值给T的类型。
+  type T6 = Extract<"a" | "b" | "c", "a" | "e">;
+
+  // ReturnType<T>
+  // 获取函数返回值类型 参数是一个函数
+  type T8 = ReturnType<() => string>;
 }
-type ReadonlyObj = Readonly<Obj>;
-
-type PartialObj = Partial<Obj>;
-
-type PickObj = Pick<Obj, "a" | "b">;
-
-type RecordObj = Record<"x" | "y", Obj>;
-
-// 条件类型
-// T extends U ? X : Y
-
-type TypeName<T> = T extends string
-  ? "string"
-  : T extends number
-  ? "number"
-  : T extends boolean
-  ? "boolean"
-  : T extends undefined
-  ? "undefined"
-  : T extends Function
-  ? "function"
-  : "object";
-type T1 = TypeName<string>;
-type T2 = TypeName<string[]>;
-
-// (A | B) extends U ? X : Y
-// (A extends U ? X : Y) | (B extends U ? X : Y)
-type T3 = TypeName<string | string[]>;
-
-type Diff<T, U> = T extends U ? never : T;
-type T4 = Diff<"a" | "b" | "c", "a" | "e">;
-// Diff<"a", "a" | "e"> | Diff<"b", "a" | "e"> | Diff<"c", "a" | "e">
-// never | "b" | "c"
-// "b" | "c"
-
-type NotNull<T> = Diff<T, null | undefined>;
-type T5 = NotNull<string | number | undefined | null>;
-
-// Exclude<T, U>
-// NonNullable<T>
-
-// Extract<T, U>
-type T6 = Extract<"a" | "b" | "c", "a" | "e">;
-
-// ReturnType<T>
-type T8 = ReturnType<() => string>;
