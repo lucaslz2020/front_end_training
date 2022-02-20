@@ -1,0 +1,6 @@
+{
+  "name": "koa_hello_word",
+  "version": "1.0.0",
+  "module": "index.js",
+  "type": "module"
+}
