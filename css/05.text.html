@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字体与文本</title>
+    <style>
+      p {
+        width: 150px;
+        text-align: left;
+        text-decoration: overline line-through underline dotted red;
+      }
+      span {
+        text-combine-upright: all;
+      }
+      .skip-ink {
+        text-decoration-skip-ink: auto;
+        text-rendering: optimizeSpeed;
+        text-decoration: underline;
+        text-indent: 100px;
+        text-orientation: upright;
+        writing-mode: vertical-rl;
+      }
+      .liga {
+        font-feature-settings: "liga" 0;
+      }
+      .button {
+        display: block;
+        border: 1px solid red;
+        height: 64px;
+        line-height: 64px;
+        text-align: center;
+        font-style: italic;
+      }
+      .text-shadow {
+        text-shadow: 0 0 0 #0000ff;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <span>11</span>这是一段文本 这是一段文本 这是一段文本 这是一段文本
+      这是一段文本 这是一段文本 这是一段文本 这是一段文本 这是一段文本
+      这是一段文本 这是一段文本
+    </p>
+    <div class="skip-ink">
+      You should go and grab a cup of coffee. 测试 You should go and grab a cup
+      of coffee. 测试
+    </div>
+    <span class="liga">Affirmative</span>
+    <span class="button">Sign Up</span>
+    <span class="text-shadow">文字阴影</span>
+  </body>
+</html>

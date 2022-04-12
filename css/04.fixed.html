@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fixed</title>
+    <style>
+        div {
+            height:100px;
+            width: 100px;
+            overflow: auto;
+        }
+        .title {
+            position: fixed;
+            width: 100px;
+            height: 20px;
+            background: #fff;
+        }
+        body {
+            font-size: medium;
+            font-weight: Black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- fixed会固定在某个位置，滚动时不会发生变化 -->
+        <div class="title">标题</div>
+        <p>测试1</p>
+        <p>测试2</p>
+        <p>测试3</p>
+        <p>测试4</p>
+        <p>测试5</p>
+    </div>
+</body>
+</html>

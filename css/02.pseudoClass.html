@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类</title>
+    <style>
+        /* 每一行tr下第2个td */
+        table tbody tr td:nth-child(2) {
+            background-color: green;
+        }
+        /* 第二行tr第四个td */
+        table tbody tr:nth-child(2) td:nth-child(4) {
+            background-color: green;
+        }
+        /* 第二行tr */
+        table tbody tr:nth-child(1) {
+            background-color: green;
+        }
+        table tbody tr:last-child td:last-child {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>表格标题</caption>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>年龄</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="2">合计</td>
+                <td>30</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>10</td>
+                <td>深圳</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>20</td>
+                <td>广州</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
