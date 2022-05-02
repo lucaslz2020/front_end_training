@@ -1,6 +1,7 @@
 import BabelWithEmotion from "./BabelWithEmotion";
 import JSXPragmaWithEmotion from "./JSXPragmaWithEmotion";
 import CSSResult from "./CSSResult";
+import ArticleText, { P } from "./ArticleText";
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <BabelWithEmotion />
       <JSXPragmaWithEmotion />
       <CSSResult />
+      <P />
+      <ArticleText />
     </>
   );
 }
