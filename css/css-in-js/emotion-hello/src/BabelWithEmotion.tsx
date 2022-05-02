@@ -1,6 +1,13 @@
-import { jsx, css } from "@emotion/react";
+import { css } from "@emotion/react";
 
 const color = "white";
+
+const styles = css({
+  padding: 20,
+  backgroundColor: "hotpink",
+  fontSize: 24,
+  borderRadius: 4,
+});
 
 export default function BabelWithEmotion() {
   return (
