@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { css, Global } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 export const Button = styled.button`
   color: red;
@@ -68,7 +68,7 @@ export const Parent = styled.div({
   },
 });
 
-export const Nesting = styled("span")`
+export const Nesting = styled.span`
   color: lightgreen;
   & > a {
     color: hotpink;
@@ -100,3 +100,24 @@ export const Composition = () => (
     <div css={[base, danger]}>This will be red</div>
   </div>
 );
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Rotate = styled.div`
+  display: inline-block;
+  animation: ${rotate} 2s linear infinite;
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+`;
+
+const css1: any = {
+  background: ["red", "linear-gradient(#e66465, #9198e5)"],
+  height: 100,
+};

@@ -14,7 +14,13 @@ import {
   Fancy,
   Nesting,
   Parent,
+  Rotate,
 } from "./StyledComponents";
+import { ThemeDemo } from "./Theme";
+import { Label } from "./Label";
+import { MyClassNames } from "./ClassNames";
+import { Cache } from "./Cache";
+import { MediaQueries } from "./MediaQueries";
 
 function App() {
   return (
@@ -71,6 +77,16 @@ function App() {
       />
       <a>This is red</a>
       <div className="some-class">This classname is .some-class</div>
+
+      <Rotate>😄</Rotate>
+      <ThemeDemo />
+
+      <Label />
+      <MyClassNames />
+
+      <Cache />
+
+      <MediaQueries />
     </>
   );
 }
