@@ -63,4 +63,66 @@ describe("字符串", () => {
   test("匹配最少次数", () => {
     console.log("Today is 5 22, 2022".match(/\d{4,}/g));
   });
+  test("单词边界", () => {
+    console.log("lucas lucas1 lucaslz".match(/\blucas\b/g));
+  });
+  test("不是单词边界", () => {
+    console.log("lucas lucas1 lucaslz".match(/\Blucas\B/g));
+    console.log("lucaslucas1lucaslz".match(/\Blucas\B/g));
+  });
+  test("字符串开始", () => {
+    console.log("字符串开始", "1本书，2本书".match(/^\d+/g));
+  });
+  test("字符串结束", () => {
+    console.log("字符串结束", `1book,2book`.match(/\w+$/g));
+  });
+  test("字符串开始结束", () => {
+    console.log("字符串开始结束", `1book，2book`.match(/^\d\w+$/g));
+  });
+  test("多行模式", () => {
+    console.log(
+      `
+      第1本书正则
+      第2本书JavaScript
+      第3本书HTML
+    `.match(/\d+/gm)
+    );
+    console.log(
+      `
+1book
+2book
+`.match(/^\d\w+$/gm)
+    );
+  });
+
+  test("分组", () => {
+    console.log("分组1", "Googoogoo".match(/go+/gi));
+    console.log("分组2", "Googoogoo".match(/(go)+/gi));
+  });
+
+  test("向前环视", () => {
+    console.log("2022年5月29日".match(/\d+(?=日)/g));
+  });
+  test("否定向前环视", () => {
+    console.log("否定向前环视", "2022年5月29日".match(/\d+(?![\d+日])/g));
+    console.log("否定向前环视", "2022年5月29日".match(/\d+(?!日)/g));
+  });
+  test("向后环视", () => {
+    console.log("2022年5月29日订单金额￥12".match(/(?<=￥)\d+/g));
+  });
+  test("否定向后环视", () => {
+    console.log("2022年5月29日订单金额￥12".match(/(?!=￥)\d+/g));
+  });
+  test("贪婪匹配", () => {
+    console.log("ber beer beeer beeeer".match(/.*r/));
+  });
+  test("懒惰匹配", () => {
+    console.log("ber beer beeer beeeer".match(/.*?r/));
+  });
+  test("或操作", () => {
+    console.log("19902021".match(/(19|20)/g));
+  });
+  test("反向引用", () => {
+    console.log("This is a test test text.".match(/\s+(\w+)\s+\1/g));
+  });
 });
