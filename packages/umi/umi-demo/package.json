@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "umi dev",
-    "build": "umi build"
+    "build": "cross-env ANALYZE=1 umi build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "umi": "^4.0.2",
-    "antd": "^4.21.3"
+    "@umijs/plugins": "^4.0.2",
+    "antd": "^4.21.3",
+    "umi": "^4.0.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "prettier": "^2",
     "prettier-plugin-organize-imports": "^2",
     "prettier-plugin-packagejson": "^2",
