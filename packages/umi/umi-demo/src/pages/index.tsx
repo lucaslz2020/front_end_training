@@ -1,13 +1,13 @@
-import { Link, useSearchParams } from "umi";
-import { Button } from "antd";
-import { useLocation } from "umi";
+import { Button } from 'antd';
+import React from 'react';
+import { Link, useLocation, useSearchParams } from 'umi';
 
 export default () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const a = searchParams.get("a");
-  const b = searchParams.get("b");
+  const a = searchParams.get('a');
+  const b = searchParams.get('b');
   const location = useLocation();
-  console.log("location", location);
+  console.log('location', location);
   return (
     <div>
       Index Page
@@ -20,7 +20,7 @@ export default () => {
       <p>State c:{location.state?.c}</p>
       <Button
         onClick={() => {
-          setSearchParams({ a: 123, b: 456 });
+          setSearchParams({ a: '123', b: '456' });
         }}
       >
         Change SearchParams
