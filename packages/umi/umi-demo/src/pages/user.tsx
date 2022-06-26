@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import 'antd/es/button/style';
 import React from 'react';
 import { createSearchParams, history, useNavigate } from 'umi';
 
