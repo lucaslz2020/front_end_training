@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const bucket = new Set();
+    const data = {text: "Hello"};
+
+    const effect = () => {
+        console.log("hello")
+        document.body.innerText = obj.text;
+    }
+    const obj = new Proxy(data, {
+        get(target, p, receiver) {
+            bucket.add(effect);
+            return target[p];
+        },
+        set(target, p, newValue, receiver) {
+            target[p] = newValue;
+            bucket.forEach(fn => fn());
+            return true;
+        }
+    })
+    effect();
+    setTimeout(() => {
+        obj.text = "Hello World";
+        // 问题是任意一个属性变化都会被监听到。
+        // obj.ada = 'aaa';
+    }, 1000);
+</script>
