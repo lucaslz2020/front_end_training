@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script type="module">
+    const request = window.indexedDB.open("users", 1);
+    request.onupgradeneeded = (event) => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains("books")) {
+        db.createObjectStore("books", {keyPath: "id"});
+      }
+    }
+    request.onerror = () => {
+      console.error("ERROR", this.error);
+    }
+    request.onsuccess = () => {
+      const db = request.result;
+      let transaction = db.transaction("books", "readwrite");
+
+      const books = transaction.objectStore("books");
+      const book = {
+        id: 2,
+        name: "javascript",
+        price: 10,
+        created: new Date(),
+      }
+      // const bookRequest = books.add(book);
+      // bookRequest.onsuccess = () => {
+      //   console.log("新增成功");
+      // }
+      // bookRequest.onerror = () => {
+      //   console.log("新增失败");
+      // }
+      let findAll = books.getAll();
+      findAll.onsuccess = () => {
+        let aaa = findAll.result;
+        console.log("aaa",  aaa);
+      }
+    }
+
+
+
+
+    // request.onsuccess = (event) => {
+    //   const db = event.target.result;
+    //   if (db.objectStoreNames.contains("users")) {
+    //     db.deleteObjectStore("users");
+    //   }
+    //
+    //   db.createObjectStore("users", {
+    //     autoIncrement: true,
+    //     keyPath: "id",
+    //   });
+    //
+    //   const transaction = db.transaction("users");
+    //   const store = transaction.objectStore("users");
+    //
+    //   store.add({ id: 1, username: "lucas1", created: new Date() });
+    //   store.add({ id: 2, username: "lucas2", created: new Date() });
+    //   store.add({ id: 3, username: "lucas3", created: new Date() });
+    //
+    //   console.log(store.getAll());
+    // };
+  </script>
+</html>
