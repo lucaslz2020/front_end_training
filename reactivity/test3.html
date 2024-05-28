@@ -60,12 +60,13 @@
     });
 
     effect(() => {
+        console.log('effect run')
         document.body.innerHTML = obj.ok ? obj.text : "NOT Content";
     });
 
     setTimeout(() => {
         // 这种方案就解决了针对具体的属性变更。
-        obj.ok = true;
+        obj.ok = false;
         obj.text = 'Hello world'; // 多监听了。
     }, 1000);
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  const bucket = new WeakMap();
+  const data = { text: "Hello", ok: true };
+
+  const obj = new Proxy(data, {
+    get(target, p, receiver) {
+      track(target, p);
+      return target[p];
+    },
+    set(target, p, newValue, receiver) {
+      target[p] = newValue;
+      trigger(target, p);
+    },
+  });
+
+
+  let activeEffect;
+
+  function cleanup(effectFn) {
+    for (let i = 0; i < effectFn.deps.length; i++) {
+        const deps = effectFn.deps[i];
+        deps.delete(effectFn);
+    }
+    effectFn.deps.length = 0;
+  }
+
+  function effect(fn) {
+    const effectFn = () => {
+      cleanup(effectFn);
+      activeEffect = effectFn;
+      fn();
+    };
+    effectFn.deps = [];
+    effectFn();
+  }
+
+  function track(target, p) {
+    if (!activeEffect) {
+      return;
+    }
+    let depsMapping = bucket.get(target);
+    if (!depsMapping) {
+      bucket.set(target, (depsMapping = new Map()));
+    }
+    let deps = depsMapping.get(p);
+    if (!deps) {
+      depsMapping.set(p, (deps = new Set()));
+    }
+    deps.add(activeEffect);
+    activeEffect.deps.push(deps);
+  }
+
+  function trigger(target, p) {
+    let depsMapping = bucket.get(target);
+    if (!depsMapping) {
+      return;
+    }
+    const effects = depsMapping.get(p);
+    const effectsToRun = new Set(effects);
+    if (effects) {
+      effects.forEach((fn) => effectsToRun.add(fn));
+    }
+    effectsToRun.forEach((fn) => fn());
+  }
+
+
+  effect(() => {
+    console.log('effect run')
+    document.body.innerHTML = obj.ok ? obj.text : "NOT Content";
+  });
+
+  setTimeout(() => {
+    // 这种方案就解决了针对具体的属性变更。
+    obj.ok = false;
+    obj.text = "Hello world"; // 多监听了。
+  }, 1000);
+</script>
