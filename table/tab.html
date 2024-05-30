@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Navigation with Arrow Keys</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<form id="form">
+    <label for="extraInput1">Extra Input1:</label>
+    <input type="text" id="extraInput1" name="extraInput">
+    <label for="extraInput2">Extra Input2:</label>
+    <input type="text" id="extraInput2" name="extraInput">
+    <label for="extraInput3">Extra Input3:</label>
+    <input type="text" id="extraInput3" name="extraInput">
+    <label for="extraInput4">Extra Input4:</label>
+    <input type="text" id="extraInput4" name="extraInput">
+    <label for="extraInput5">Extra Input5:</label>
+    <input type="text" id="extraInput5" name="extraInput">
+    <label for="extraInput6">Extra Input6:</label>
+    <input type="text" id="extraInput6" name="extraInput">
+    <label for="extraInput7">Extra Input7:</label>
+    <input type="text" id="extraInput7" name="extraInput">
+    <label for="extraInput8">Extra Input8:</label>
+    <input type="text" id="extraInput8" name="extraInput">
+    <table id="inputTable">
+        <tr>
+            <td><input type="text" name="field1"></td>
+            <td><input type="text" name="field2"></td>
+            <td><input type="text" name="field3"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="field4"></td>
+            <td><input type="text" name="field5"></td>
+            <td><input type="text" name="field6"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="field7"></td>
+            <td><input type="text" name="field8"></td>
+            <td><input type="text" name="field9"></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('form');
+        const inputs = form.querySelectorAll('input');
+        const inputArray = Array.from(inputs); // 将 NodeList 转换为数组
+
+        for (let input of inputs) {
+            input.addEventListener('keydown', (event) => {
+                let currentIndex = inputArray.indexOf(event.target);
+
+                switch (event.key) {
+                    case 'ArrowDown':
+                        event.preventDefault();
+                        if (currentIndex >= 0 && currentIndex < inputArray.length - 1) {
+                            inputArray[currentIndex + 1].focus();
+                        }
+                        break;
+                    case 'ArrowUp':
+                        event.preventDefault();
+                        if (currentIndex > 0) {
+                            inputArray[currentIndex - 1].focus();
+                        }
+                        break;
+                    case 'ArrowLeft':
+                        // 左右箭头键仅在表格内有效
+                        if (event.target.closest('table')) {
+                            event.preventDefault();
+                            if (currentIndex % 3 > 0) { // 仅在非首列有效
+                                inputArray[currentIndex - 1].focus();
+                            }
+                        }
+                        break;
+                    case 'ArrowRight':
+                        // 左右箭头键仅在表格内有效
+                        if (event.target.closest('table')) {
+                            event.preventDefault();
+                            if (currentIndex % 3 < 2 && currentIndex < inputArray.length - 1) { // 仅在非末列有效
+                                inputArray[currentIndex + 1].focus();
+                            }
+                        }
+                        break;
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
